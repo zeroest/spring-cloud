@@ -22,4 +22,9 @@ public class WelcomController {
         return header;
     }
 
+    @GetMapping("/check")
+    public String check() {
+        return "check first";
+    }
+
 }
