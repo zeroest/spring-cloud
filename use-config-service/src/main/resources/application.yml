@@ -2,6 +2,20 @@
 server:
   port: 8088
 
+spring:
+  application:
+    name: use-config-service
+
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 5
+  #    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
 management:
   endpoints:
     web:

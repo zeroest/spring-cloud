@@ -42,3 +42,17 @@ spring:
                 baseMessage: Logging filter
                 preLogger: true
                 postLogger: true
+        - id: use-config-service
+          uri: lb://USE-CONFIG-SERVICE
+          predicates:
+            - Path=/use-config-service/**
+            - Method=GET,POST
+          filters:
+            - RewritePath=/use-config-service/(?<segment>.*), /$\{segment}
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace
