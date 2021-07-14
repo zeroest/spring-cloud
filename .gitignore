@@ -1,1 +1,6 @@
+
 spring_cloud-config_repo/
+
+rabbitmq/volume/data/
+rabbitmq/volume/log/
+
