@@ -18,6 +18,11 @@ ext {
 
 dependencies {
     implementation 'org.springframework.cloud:spring-cloud-config-server'
+
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
@@ -29,4 +34,32 @@ dependencyManagement {
 
 test {
     useJUnitPlatform()
+}
+
+// =====================================================================================
+task moveLib {
+    doLast {
+        def unpackDir = "$buildDir/unpack"
+        ant.move(file: "${unpackDir}/app/BOOT-INF/lib", toFile: "${unpackDir}/lib")
+    }
+}
+
+task unpackJar(type: Copy) {
+    def unpackDir = "$buildDir/unpack"
+    def jarFile = "$buildDir/libs/${rootProject.name}-${version}.jar"
+
+    delete unpackDir
+    from zipTree(jarFile)
+    into "$unpackDir/app"
+
+    finalizedBy moveLib
+}
+
+build {
+    finalizedBy unpackJar
+}
+// =====================================================================================
+
+jar {
+    enabled = false
 }

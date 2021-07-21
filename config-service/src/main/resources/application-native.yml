@@ -1,0 +1,18 @@
+
+
+spring:
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: root
+    password: pass
+
+  cloud:
+    config:
+      server:
+#        네이티브 파일 리파지토리
+        native:
+          search-locations: file://${user.home}/workspace/spring/spring-cloud/spring_cloud-config_repo
+#        git:
+#          uri: file:///home/kyd/workspace/spring/spring-cloud/spring_cloud-config_repo
