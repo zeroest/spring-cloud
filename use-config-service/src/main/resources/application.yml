@@ -6,6 +6,12 @@ spring:
   application:
     name: use-config-service
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: root
+    password: pass
+
 eureka:
   instance:
     lease-renewal-interval-in-seconds: 5
